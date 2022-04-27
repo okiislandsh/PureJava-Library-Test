@@ -5,6 +5,7 @@ package jp.okiislandsh.library;
  */
 public final class App {
     private App() {
+        //成功した
     }
 
     /**
