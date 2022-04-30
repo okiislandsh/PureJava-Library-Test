@@ -1,0 +1,8 @@
+GitHubを利用したJavaライブラリのソース管理とMavenリポジトリ公開について
+
+ソース管理 : GitHub
+Mavenリポジトリ : GitHub Pages
+
+VSCodeとGitHubを連携しソース管理
+deployでリポジトリをプロジェクト直下に生成し、 ※targetだとcleanで消えちゃうので、リポジトリ自体もソース管理に登録する
+com.github.githubのsite-maven-pluginでアップロードする。
