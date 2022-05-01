@@ -4,8 +4,10 @@
   <!-- Gradle ex) groupId:artifactId:version -->
   <groupId>jp.okiislandsh.library</groupId>
   <artifactId>test</artifactId>
-  <version>1.0</version>
+  <version>1.2</version>
   <inceptionYear>2022</inceptionYear>
+
+  <url>https://github.com/okiislandsh/PureJava-Library-Test/</url>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -207,6 +209,7 @@
           <outputDirectory>mvn-repo</outputDirectory>
           <!-- trueでmaven-project-info-reports-pluginが出力される -->
           <generateReports>true</generateReports>
+          <generateProjectInfo>false</generateProjectInfo>
         </configuration>
         <dependencies>
           <dependency>
@@ -222,11 +225,11 @@
 
   <reporting>
     <plugins>
-      <plugin>
+      <!--plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven-javadoc-plugin.version}</version>
-      </plugin>
+      </plugin-->
       <!-- https://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

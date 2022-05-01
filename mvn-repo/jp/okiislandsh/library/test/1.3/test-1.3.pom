@@ -7,6 +7,15 @@
   <version>1.3</version>
   <inceptionYear>2022</inceptionYear>
 
+  <url>https://github.com/okiislandsh/PureJava-Library-Test/</url>
+
+  <licenses>
+    <license>
+      <name>The MIT license</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
+
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -206,7 +215,8 @@
           <outputEncoding>UTF-8</outputEncoding>
           <outputDirectory>mvn-repo</outputDirectory>
           <!-- trueでmaven-project-info-reports-pluginが出力される -->
-          <generateReports>false</generateReports>
+          <generateReports>true</generateReports>
+          <generateProjectInfo>false</generateProjectInfo>
         </configuration>
         <dependencies>
           <dependency>
@@ -222,11 +232,11 @@
 
   <reporting>
     <plugins>
-      <plugin>
+      <!--plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven-javadoc-plugin.version}</version>
-      </plugin>
+      </plugin-->
       <!-- https://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -235,23 +245,23 @@
         <reportSets>
           <reportSet>
             <reports>
-              <report>ci-management</report>
+              <!--report>ci-management</report-->
               <report>dependencies</report>
               <!--report>dependency-convergence</report-->
               <report>dependency-info</report>
               <report>dependency-management</report>
               <!-- ローカルパスとか出力される report>distribution-management</report-->
-              <report>help</report>
+              <!--report>help</report-->
               <report>index</report>
-              <report>issue-management</report>
+              <!--report>issue-management</report-->
               <report>licenses</report>
               <!--report>mailing-lists</report-->
-              <report>modules</report>
+              <!--report>modules</report-->
               <!--report>plugin-management</report-->
               <!--report>plugins</report-->
-              <report>scm</report>
-              <report>summary</report>
-              <report>team</report>
+              <!--report>scm</report-->
+              <!--report>summary</report-->
+              <!--report>team</report-->
             </reports>
           </reportSet>
         </reportSets>
