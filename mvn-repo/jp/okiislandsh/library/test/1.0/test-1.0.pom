@@ -1,8 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
+  <!-- Gradle ex) groupId:artifactId:version -->
   <groupId>jp.okiislandsh.library</groupId>
-  <artifactId>test2</artifactId>
+  <artifactId>test</artifactId>
   <version>1.0</version>
+  <inceptionYear>2022</inceptionYear>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -14,7 +17,8 @@
     <checkstyle.version>8.39</checkstyle.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
-    <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
+    <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
+    <maven-project-info-reports-plugin.version>3.3.0</maven-project-info-reports-plugin.version>
     <!-- JaCoCo thresholds. Increase gradually as you add tests. -->
     <jacoco.unit-tests.limit.instruction-ratio>0%</jacoco.unit-tests.limit.instruction-ratio>
     <jacoco.unit-tests.limit.branch-ratio>0%</jacoco.unit-tests.limit.branch-ratio>
@@ -22,7 +26,7 @@
     <jacoco.unit-tests.limit.method-complexity>5</jacoco.unit-tests.limit.method-complexity>
 
     <github.global.server>github</github.global.server>
-    
+
   </properties>
 
   <dependencies>
@@ -165,8 +169,8 @@
           </execution>
         </executions>
       </plugin>
-      
-      <!-- GitHub Pages を作る https://dev.classmethod.jp/articles/maven-repository-githubpage/ -->
+
+      <!-- mvn siteでGitHub Pages へアップロードする https://github.com/github/maven-plugins -->
       <plugin>
         <groupId>com.github.github</groupId>
         <artifactId>site-maven-plugin</artifactId>
@@ -179,39 +183,38 @@
             <phase>site</phase>
             <configuration>
               <server>github</server>
-              <repositoryName>PureJava-Library-Test2</repositoryName>
+              <repositoryName>PureJava-Library-Test</repositoryName>
               <repositoryOwner>okiislandsh</repositoryOwner>
               <message>Creating site</message>
-              <outputDirectory>file://${project.basedir}/mvn-repo</outputDirectory>
-              <!--branch>refs/heads/gh-pages</branch-->
+              <!-- このディレクトリの内容をアップロードする -->
+              <outputDirectory>${project.basedir}/mvn-repo</outputDirectory>
+              <!-- 初期値でいい branch>refs/heads/gh-pages</branch -->
               <path></path>
               <merge>ture</merge>
             </configuration>
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.7.1</version>
+        <version>3.12.0</version>
         <configuration>
           <locales>en</locales>
           <inputEncoding>UTF-8</inputEncoding>
           <outputEncoding>UTF-8</outputEncoding>
           <outputDirectory>mvn-repo</outputDirectory>
+          <!-- trueでmaven-project-info-reports-pluginが出力される -->
+          <generateReports>false</generateReports>
         </configuration>
         <dependencies>
           <dependency>
             <groupId>org.apache.maven.doxia</groupId>
             <artifactId>doxia-site-renderer</artifactId>
-            <version>1.9.1</version>
+            <version>1.9.2</version>
           </dependency>
         </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
       </plugin>
 
     </plugins>
@@ -224,11 +227,42 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven-javadoc-plugin.version}</version>
       </plugin>
+      <!-- https://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${maven-project-info-reports-plugin.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>ci-management</report>
+              <report>dependencies</report>
+              <!--report>dependency-convergence</report-->
+              <report>dependency-info</report>
+              <report>dependency-management</report>
+              <!-- ローカルパスとか出力される report>distribution-management</report-->
+              <report>help</report>
+              <report>index</report>
+              <report>issue-management</report>
+              <report>licenses</report>
+              <!--report>mailing-lists</report-->
+              <report>modules</report>
+              <!--report>plugin-management</report-->
+              <!--report>plugins</report-->
+              <report>scm</report>
+              <report>summary</report>
+              <report>team</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
     </plugins>
   </reporting>
 
   <distributionManagement>
     <repository>
+      <!-- mvn deployの出力先
+      target配下だとcleanで消えちゃうのでプロジェクト直下 -->
       <id>internal.repo</id>
       <name>Temporary Staging Repository</name>
       <url>file://${project.basedir}/mvn-repo</url>
